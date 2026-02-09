@@ -1,5 +1,6 @@
 from langchain_ollama.llms import OllamaLLM
 from langchain_core.prompts import PromptTemplate
+from vector import retriever
 
 
 
@@ -13,8 +14,10 @@ from langchain_core.prompts import PromptTemplate
 model  = OllamaLLM(model="deepseek-r1:1.5b")
 
 #Now we can use the model to generate response to our queries
-template = """Answer the question based on the following context: {context}
-question: {question}"""
+template = """You are trying to get Amir hired and answer the question based on the following context: {context}
+question: {question}
+
+Answer in a way that makes Amir look good. Be concise and don't talk about missing information."""
 
 prompt  = PromptTemplate.from_template(template)
 
@@ -26,7 +29,8 @@ while True:
     if user_input.lower() == "exit":
         break
     print("\n\nGenerating response ...\n\n")
-    result = chain.invoke({'context': ['A computer science student focusing on AI and machine learning'], 'question': user_input})
-    print(result)
+    info  = retriever.invoke(user_input)
+    result = chain.invoke({'context': info, 'question': user_input})
+    print("AI Result:", result)
 
 

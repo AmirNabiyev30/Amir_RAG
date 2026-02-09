@@ -1,0 +1,58 @@
+Amir Nabiyev
+Phone: 347-935-4619
+Email: amirn2203@gmail.com
+LinkedIn: linkedin.com/in/amirnabiyev
+GitHub: github.com/AmirNabiyev30
+
+Education
+The City College of New York (CCNY), CUNY
+Bachelor of Science in Computer Science
+Expected Graduation: Fall 2026
+GPA: 3.77
+Location: New York, NY
+
+Relevant Coursework:
+Software Engineering, Intro to Data Science, Numerical Computing, Intro to Applied Mathematical Computation, Calculus III, Linear Algebra
+
+Experience
+CS / Math Tutor
+Tutor — New York, NY
+January 2024 – Present
+Delivered personalized instruction across Algebra, Geometry, Trigonometry, Pre-Calculus, Calculus I–III, and Linear Algebra, helping students strengthen problem-solving and analytical reasoning.
+Adapted explanations for diverse learning styles, improving student performance and conceptual understanding in STEM coursework.
+
+TRC Companies
+PropTech Intern — New York, NY
+July 2024 – August 2024
+Developed comprehensive case studies on innovative building technologies, detailing their applications and impact on energy efficiency.
+Collaborated with city agencies and PropTech companies on the NYC PropTech Piloting Program, enhancing sustainability in city-owned buildings through advanced technology solutions.
+Received foundational training in building science and clean energy technologies, enhancing technical knowledge and professional skills.
+
+Google Code Next
+Student Engineer — New York, NY
+September 2022 – June 2023
+Utilized HTML, CSS, JavaScript, and the React.js framework to create multi-page intricate websites.
+Applied industry best practices in web development, including version control with Git and web design principles for optimal user experience.
+Used Bootstrap and basic JavaScript to create a dynamic, interactive, and responsive user interface.
+
+Projects
+Digit Recognizer Neural Network — Python
+Developed a digit classification model using a fully connected neural network implemented from scratch with NumPy.
+Engineered forward propagation, backpropagation, and gradient descent without relying on machine learning libraries.
+Achieved over 92% accuracy on MNIST test data.
+
+Book Recommendation System
+Built a collaborative filtering model using matrix factorization to predict user–item ratings.
+Tracked experiments and model versions with MLflow.
+Trained on ratings stored in SQLite and served inference via FastAPI.
+
+nanoGPT Implementation — Python, PyTorch
+Recreated Andrej Karpathy’s nanoGPT from scratch.
+Implemented multi-head self-attention, positional encoding, and autoregressive text generation.
+Built custom training loop and tokenization pipeline.
+Experimented with model scaling and hyperparameter tuning.
+
+Technical Skills
+Languages: C++, JavaScript, Python, React
+Tools: VS Code, Git, CLion, PyCharm
+Skills: Machine Learning, AI, Data Science, MySQL

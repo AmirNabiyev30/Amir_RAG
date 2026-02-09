@@ -1,2 +1,5 @@
 langchain_ollama
 langchain_core
+langchain_chroma
+langchain_text_splitters
+
