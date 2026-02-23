@@ -2,6 +2,7 @@ import { useState } from "react";
 import ChatInput from "./chatinput";
 import {useImmer} from "use-immer";
 import ChatMessages from "./chatMessages";
+import sendMessage from "../api.ts";
 
 export interface UserMessage{
         role:string,
@@ -57,10 +58,10 @@ function Chatbot() {
                 //chatIdorNew = id;
             }
             //const response = await aPi.sendMessage(chatIdorNew,trimmedMessage);
-            const response = "this is an AI message"
+            const res = await sendMessage(trimmedMessage)
             //update the last message in the messages array with the response from the chatbot and set loading to false
             setMessages(draft => {
-                draft[draft.length-1].content = response;
+                draft[draft.length-1].content = res.response;
                 //(draft[draft.length-1] as AIMessage).sources = response.sources;
                 (draft[draft.length-1] as AIMessage).loading = false;
             });

@@ -12,7 +12,7 @@ from langchain_core.documents import Document
 
 embeddings  = OllamaEmbeddings(model = "embeddinggemma:300m")
 
-db_location  = "./chroma_langchain.db"
+db_location  = "../../../chroma_langchain.db"
 
 
 #if we have to add docuements or if we have already done it
@@ -24,7 +24,7 @@ if add_documents:
     #we will add some documents to our chroma db
     documents = []
     ids = []
-    with open("./documents.txt", "r") as f:
+    with open("../../../documents.txt", "r") as f:
         info = f.read()
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
         chunks = text_splitter.split_text(info)
