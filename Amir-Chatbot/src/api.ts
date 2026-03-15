@@ -5,6 +5,9 @@ const API_URL = "http://localhost:8000";
 
 interface APIResponse {
     response:string
+    retriever_time:number;
+    prompt_time:number;
+    sources:string[];
 }
 
 async function sendMessage(message:string):Promise<APIResponse> {

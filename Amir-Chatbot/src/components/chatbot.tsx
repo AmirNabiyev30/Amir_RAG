@@ -3,7 +3,7 @@ import ChatInput from "./chatinput";
 import {useImmer} from "use-immer";
 import ChatMessages from "./chatMessages";
 import sendMessage from "../api.ts";
-
+import "./chatbot.css";
 export interface UserMessage{
         role:string,
         content:string,
@@ -17,10 +17,6 @@ export interface AIMessage extends UserMessage{
 function Chatbot() {
     //State to hold user input 
     //State to hold chatbot response
-    
-
-    
-
     const [newMessage,setNewMessage] = useState<string>("");
     const [messages,setMessages] = useImmer<(UserMessage|AIMessage)[]>([])
     const [chatId,setChatId] = useState<number|null>(null)
@@ -64,26 +60,38 @@ function Chatbot() {
                 draft[draft.length-1].content = res.response;
                 //(draft[draft.length-1] as AIMessage).sources = response.sources;
                 (draft[draft.length-1] as AIMessage).loading = false;
+                (draft[draft.length-1] as AIMessage).sources = res.sources;
             });
+            console.log("Retriever Time:", res.retriever_time.toFixed(2), "Prompt Time:", res.prompt_time.toFixed(2));
        }
        catch(err){
         console.log(err);
         //if there is an error, we want to remove the loading message and show an error message
         setMessages(draft => {
             draft.pop();
-            draft.push({role:"assistant",content:"Sorry, something went wrong. Please try again later.",loading:false,sources:[]})
+            draft.push({role:"assistant",content:"Something went wrong, give Amir a couple of days to figure out what went wrong.",loading:false,sources:[]})
         });
        }
     }
 
     return (
-        <div>
+    <div>
+            <div className = "welcome-message">
+            <h1> Amir's Chatbot</h1>
+                <p>Ask me anything! I can help with a variety of topics and you can experiment which RAG techniques you want
+                    to implement in the backend. Choose your RAG technique below and start chatting!
+                </p>
+            </div>
+        <div className = "chatbot">
+            
             {//if there are no messages to be printed, show welcomes message
             messages.length === 0 &&
             <div>
                 <h2> Welcome to Amir's Chatbot</h2>
+                
              </div>   
             }
+
             <ChatMessages messages={messages} isLoading={isLoading} />
             <ChatInput
                 newMessage = {newMessage}
@@ -92,6 +100,7 @@ function Chatbot() {
                 submitNewMessage = {submitNewMessage} 
                 />
         </div>
+    </div>
     )
 }
 export default Chatbot;

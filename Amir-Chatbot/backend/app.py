@@ -4,6 +4,7 @@ from langchain_ollama.llms import OllamaLLM
 from langchain_core.prompts import PromptTemplate
 from vector import retriever
 from pydantic import BaseModel
+import time
 
 app = FastAPI()
 
@@ -30,11 +31,12 @@ model = OllamaLLM(model = "deepseek-r1:1.5b")
 #Now we can use the model to generate response to our queries
 
 #the prompt template we are using, designed to optimize for getting Amir hired
-template = """You are trying to get Amir hired and answer the question based on the following context: {context}
-question: {question}
+template = """You are trying to get Amir hired and answer the question based on the following context: {context},
+
+The question you want to answer is: {question}
 
 Answer in a way that makes Amir look good. Be concise and don't talk about missing information.
-If asked for a URl, provide a URL that is relevant to the question"""
+If asked for a URL, provide a URL that is relevant to the question"""
 
 prompt  = PromptTemplate.from_template(template)
 
@@ -46,9 +48,15 @@ class ChatRequest(BaseModel):
 
 @app.post("/chat")
 async def chat(question:ChatRequest):
+    rstime = time.time()
     info = retriever.invoke(question.question)
+    retime = time.time()
+    retriever_time  = retime - rstime
+    pstime = time.time()
     result = chain.invoke({'context': info, 'question': question.question})
-    return {"response":result}
+    petime  = time.time()
+    prompt_time = petime - pstime
+    return {"response":result, "retriever_time": retriever_time, "prompt_time": prompt_time, "sources":info}
 
 
 

@@ -1,6 +1,7 @@
 import useAutoSize from "../hooks/useAutoSize";
 import React from "react";
 import { IoIosSend } from "react-icons/io";
+import "./chatbot.css";
 
 interface ChatInputProps {
     newMessage:string;
@@ -24,20 +25,24 @@ function ChatInput({newMessage,isLoading, setNewMessage,submitNewMessage}:ChatIn
     }
 
     return (
-        <div>
+    <div className = "chat-input-outer">
+        <div className = "chat-input">
             <textarea
+                id = "chat-input-textarea"
+                className = "chat-textarea"
                 ref = {textareaRef}
-                placeholder="Type your message here"
+                placeholder="Ask me anything about Amir"
                 rows = {1}
                 value = {newMessage}
                 onChange = {(e) => setNewMessage(e.target.value)}
                 onKeyDown = {handlekeyDown}
             />
-            <button onClick = {submitNewMessage}>
+            <button className = "chat-input-btn"onClick = {submitNewMessage}>
                 <IoIosSend/>
             </button>
 
         </div>
+    </div>
     )
 }
 
