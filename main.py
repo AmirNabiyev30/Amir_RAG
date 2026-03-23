@@ -13,8 +13,8 @@ from vector import retriever
 
 model  = OllamaLLM(model="deepseek-r1:1.5b")
 
-#Now we can use the model to generate response to our queries
-template = """You are trying to get Amir hired and answer the question based on the following context: {context}
+#Now we can use the model to generate response to ourY queries
+template = """you are trying to get Amir hired and answer the question based on the following context: {context}
 question: {question}
 
 Answer in a way that makes Amir look good. Be concise and don't talk about missing information."""

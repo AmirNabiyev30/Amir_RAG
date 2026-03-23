@@ -41,7 +41,7 @@ if add_documents:
 
 #now we have to be able to query our vector store
 
-retriever  = vector_store.as_retriever(search_kwargs={"k": 10})
+retriever  = vector_store.as_retriever(search_kwargs={"k": 3})
 
 
 

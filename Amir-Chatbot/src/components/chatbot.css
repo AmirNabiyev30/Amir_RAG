@@ -26,6 +26,7 @@
     width:100%;
     padding-right:1rem;
     padding-left:1rem;
+    margin-top: 5rem;
 }
 .chat-input-outer{
     position: sticky;
@@ -98,4 +99,23 @@ body{
   background: linear-gradient(0deg, hsla(186, 33%, 94%, 1) 0%,  hsla(214, 40%, 84%, 1) 69%);
   background-attachment: fixed;
   transition: background 3s ease;
+}
+
+.common-questions{
+    margin-top:1rem;
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    gap:0.5rem;
+}
+.common-question{
+    padding: 0.5rem;
+    border-radius:5px;
+    color:white;
+    background:black;
+
+}
+.common-question:hover{
+    box-shadow: 5px 5px 7px rgba(39, 39, 39, 0.3);
+    background:rgb(32, 31, 31);
 }

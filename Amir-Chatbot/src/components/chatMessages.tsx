@@ -10,6 +10,13 @@ interface ChatMessageProps{
 
 function ChatMessages({messages , isLoading}:ChatMessageProps){
 
+    // Helper function to extract text from content
+    const getMessageText = (content: string | { message: string }): string => {
+        if (typeof content === "string") {
+            return content;
+        }
+        return content.message || "";
+    };
 
     return(
         <div className = "chat-messages">
@@ -18,13 +25,15 @@ function ChatMessages({messages , isLoading}:ChatMessageProps){
                     { isLoading  && !message.content ?
                         "Loading ..."
                         :message.role === "assistant" ?
-                    <Markdown>{message.content}</Markdown>: <div>{message.content}</div>}
+                        <>
+                        <Markdown>{getMessageText(message.content)}</Markdown>
+                        </>
+                    : <div>{getMessageText(message.content)}</div>}
                 </div>
              ))
             }
         </div>
     )
-
 };
 
 export default ChatMessages;

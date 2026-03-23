@@ -4,14 +4,35 @@ import {useImmer} from "use-immer";
 import ChatMessages from "./chatMessages";
 import sendMessage from "../api.ts";
 import "./chatbot.css";
+
+// Utility function to safely parse nested JSON from API response
+function parseAIResponse(response: string): string {
+    try {
+        // If response is already a valid string starting with {, parse it
+        const trimmed = response.trim();
+        if (trimmed.startsWith("{")) {
+            const parsed = JSON.parse(trimmed);
+            return parsed.message || response;
+        }
+        return response;
+    } catch {
+        // If parsing fails, return the original response
+        return response;
+    }
+}
+
 export interface UserMessage{
         role:string,
         content:string,
 
     }
-export interface AIMessage extends UserMessage{
-        sources?:string[],
+export interface AIMessage{
+        role:string,
+        sources:string[],
         loading:boolean
+        content: string | {
+            message:string
+        }
     }
 
 function Chatbot() {
@@ -24,7 +45,7 @@ function Chatbot() {
     const isLoading:boolean = messages.length > 0 && "loading" in messages[messages.length-1] && 
     (messages[messages.length-1] as AIMessage).loading;
 
-
+    
 
     async function submitNewMessage(){
         //This function will handle sending the user message to the backend
@@ -57,7 +78,7 @@ function Chatbot() {
             const res = await sendMessage(trimmedMessage)
             //update the last message in the messages array with the response from the chatbot and set loading to false
             setMessages(draft => {
-                draft[draft.length-1].content = res.response;
+                draft[draft.length-1].content = parseAIResponse(res.response);
                 //(draft[draft.length-1] as AIMessage).sources = response.sources;
                 (draft[draft.length-1] as AIMessage).loading = false;
                 (draft[draft.length-1] as AIMessage).sources = res.sources;
@@ -74,6 +95,11 @@ function Chatbot() {
        }
     }
 
+    function handleFAQ(question:string){
+        setNewMessage(question);
+        submitNewMessage();
+    }
+
     return (
     <div>
             <div className = "welcome-message">
@@ -81,6 +107,14 @@ function Chatbot() {
                 <p>Ask me anything! I can help with a variety of topics and you can experiment which RAG techniques you want
                     to implement in the backend. Choose your RAG technique below and start chatting!
                 </p>
+            <div>
+                <h3>Frequently Asked Questions:</h3>
+            <div className = "common-questions">
+                <button className = "common-question" onClick={() => handleFAQ("What is Amir's best skills")}> What is Amir's best skills</button>
+                <button className = "common-question" onClick={() => handleFAQ("What is Amir's educational background?")}> What is Amir's educational background?</button>
+                <button className = "common-question" onClick={() => handleFAQ("What are some projects Amir has worked on?")}> What are some projects Amir has worked on?</button>
+            </div>
+            </div>
             </div>
         <div className = "chatbot">
             
